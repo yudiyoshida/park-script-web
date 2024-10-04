@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "parking-lot-web": {
+    "park-script-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/parking-lot-web",
+            "outputPath": "dist/park-script-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "parking-lot-web:build:production"
+              "buildTarget": "park-script-web:build:production"
             },
             "development": {
-              "buildTarget": "parking-lot-web:build:development"
+              "buildTarget": "park-script-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "parking-lot-web:build"
+            "buildTarget": "park-script-web:build"
           }
         },
         "test": {
