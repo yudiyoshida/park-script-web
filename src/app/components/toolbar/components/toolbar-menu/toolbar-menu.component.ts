@@ -11,6 +11,4 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
   ],
 })
-export class ToolbarMenuComponent {
-
-}
+export class ToolbarMenuComponent { }

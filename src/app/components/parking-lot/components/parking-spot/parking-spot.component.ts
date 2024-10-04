@@ -1,6 +1,8 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { ParkVehicleDialogComponent } from '../park-vehicle-dialog/park-vehicle-dialog.component';
 
 @Component({
   selector: 'app-parking-spot',
@@ -12,11 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
   ],
 })
 export class ParkingSpotComponent {
+  private dialog = inject(MatDialog);
+
   @Input({ required: true }) spotName!: string;
   @Input({ required: true }) isOccupied!: boolean;
   @Input() plate!: string;
 
   openDialog() {
-    console.log('Open dialog');
+    this.dialog.open(ParkVehicleDialogComponent);
   }
 }

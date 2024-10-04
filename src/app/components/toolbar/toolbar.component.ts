@@ -12,6 +12,4 @@ import { ToolbarMenuComponent } from './components/toolbar-menu/toolbar-menu.com
     ToolbarMenuComponent,
   ],
 })
-export class ToolbarComponent {
-
-}
+export class ToolbarComponent { }

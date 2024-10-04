@@ -11,4 +11,4 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     <router-outlet />
   `,
 })
-export class AppComponent {}
+export class AppComponent { }

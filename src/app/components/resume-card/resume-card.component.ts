@@ -13,6 +13,4 @@ import { ResumeInformationComponent } from './components/resume-information/resu
     ResumeInformationComponent,
   ],
 })
-export class ResumeCardComponent {
-  now = new Date();
-}
+export class ResumeCardComponent { }

@@ -11,4 +11,4 @@ import { ResumeCardComponent } from '../../components/resume-card/resume-card.co
     ResumeCardComponent,
   ],
 })
-export class HomeComponent {}
+export class HomeComponent { }
