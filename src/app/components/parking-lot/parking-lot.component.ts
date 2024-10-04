@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ParkingSpotComponent } from '../parking-spot/parking-spot.component';
+import { ParkingSpotComponent } from './components/parking-spot/parking-spot.component';
 
 @Component({
   selector: 'app-parking-lot',
