@@ -1,0 +1,5 @@
+<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+  @for (spot of spots; track $index) {
+    <app-parking-spot [spotName]="spot" />
+  }
+</section>
