@@ -2,7 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { ParkingSpotType } from '../../../../domain/parking-spot/parking-spot.enum';
+import { ParkingSpotType } from '../../../../shared/domain/parking-spot/parking-spot.enum';
 import { ParkVehicleDialogComponent } from '../park-vehicle-dialog/park-vehicle-dialog.component';
 
 @Component({
