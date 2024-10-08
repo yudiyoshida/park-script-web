@@ -19,6 +19,7 @@ export class ParkingSpotComponent {
   @Input({ required: true }) spotName!: string;
   @Input({ required: true }) isOccupied!: boolean;
   @Input() plate!: string;
+  @Input() type!: string;
 
   openDialog() {
     this.dialog.open(ParkVehicleDialogComponent);
