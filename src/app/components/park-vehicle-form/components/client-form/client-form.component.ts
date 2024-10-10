@@ -5,6 +5,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { ParkVehicleFormService } from '../../park-vehicle-form.service';
 import { ClientFormService } from './client-form.service';
 
+const CPF_LENGTH = 11;
+
 @Component({
   selector: 'app-client-form',
   standalone: true,
@@ -21,9 +23,15 @@ export class ClientFormComponent {
 
   public form = inject(ClientFormService).getForm();
 
-  searchClientByCpf(cpf: string) {
+  searchClientByCpf(value: string) {
+    const cpf = value.replaceAll(/[^0-9]/g, '');
+
+    if (cpf.length !== CPF_LENGTH) return;
+
+    this.form.disable();
     this.parkVehicleFormService.getByCpf(cpf).subscribe(client => {
       this.form.patchValue(client);
+      this.form.enable();
     });
   }
 }
