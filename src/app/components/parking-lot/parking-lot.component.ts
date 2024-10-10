@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ParkingSpot } from '../../shared/domain/parking-spot/parking-spot.model';
+import { ParkingSpot } from '../../shared/models/parking-spot/parking-spot.model';
 import { ParkingSpotService } from '../../shared/services/parking-spot/parking-spot.service';
 import { ParkingSpotComponent } from './components/parking-spot/parking-spot.component';
 

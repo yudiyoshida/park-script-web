@@ -2,8 +2,9 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { ParkingSpotType } from '../../../../shared/domain/parking-spot/parking-spot.enum';
+import { ParkingSpotType } from '../../../../shared/models/parking-spot/parking-spot.enum';
 import { ParkVehicleDialogComponent } from '../park-vehicle-dialog/park-vehicle-dialog.component';
+import { RemoveVehicleDialogComponent } from '../remove-vehicle-dialog/remove-vehicle-dialog.component';
 
 @Component({
   selector: 'app-parking-spot',
@@ -23,6 +24,10 @@ export class ParkingSpotComponent {
   @Input() plate!: string;
 
   openDialog() {
-    this.dialog.open(ParkVehicleDialogComponent);
+    if (this.isOccupied) {
+      this.dialog.open(RemoveVehicleDialogComponent);
+    } else {
+      this.dialog.open(ParkVehicleDialogComponent);
+    }
   }
 }

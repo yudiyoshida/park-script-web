@@ -1,12 +1,13 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject, OnDestroy, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { map, shareReplay } from 'rxjs';
+import { ClientFormComponent } from './components/client-form/client-form.component';
+import { ClientFormService } from './components/client-form/client-form.service';
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
+import { VehicleFormService } from './components/vehicle-form/vehicle-form.service';
 
 @Component({
   selector: 'app-park-vehicle-form',
@@ -14,25 +15,38 @@ import { map, shareReplay } from 'rxjs';
   templateUrl: './park-vehicle-form.component.html',
   imports: [
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatStepperModule,
+    ClientFormComponent,
+    VehicleFormComponent,
     AsyncPipe,
-    NgxMaskDirective,
-    NgxMaskPipe,
   ],
 })
-export class ParkVehicleFormComponent {
+export class ParkVehicleFormComponent implements OnDestroy {
   private breakpointObserver = inject(BreakpointObserver);
-
-  @Output() closeClick = new EventEmitter<void>();
+  private clientFormService = inject(ClientFormService);
+  private vehicleFormService = inject(VehicleFormService);
 
   public isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
     shareReplay(),
   );
 
+  public closeClick = output<void>();
+  public clientForm = this.clientFormService.getForm();
+  public vehicleForm = this.vehicleFormService.getForm();
+
   save() {
     console.log('Vehicle parked!');
+  }
+
+  close() {
+    this.clientFormService.resetForm();
+    this.vehicleFormService.resetForm();
+    this.closeClick.emit();
+  }
+
+  ngOnDestroy() {
+    this.clientFormService.resetForm();
+    this.vehicleFormService.resetForm();
   }
 }
