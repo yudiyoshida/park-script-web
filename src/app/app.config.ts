@@ -5,6 +5,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideSpinnerConfig } from 'ngx-spinner';
+import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { globalSpinnerInterceptor } from './shared/interceptors/global-spinner/global-spinner.interceptor';
 
@@ -20,6 +21,11 @@ export const appConfig: ApplicationConfig = {
     ),
     provideSpinnerConfig({
       type: 'ball-clip-rotate',
+    }),
+    provideToastr({
+      timeOut: 5000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
     }),
   ],
 };
