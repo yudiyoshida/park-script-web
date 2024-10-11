@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ParkVehicleFormService } from '../../park-vehicle-form.service';
 import { ClientFormService } from './client-form.service';
 
-const CPF_LENGTH = 11;
+const CPF_LENGTH = 14;
 
 @Component({
   selector: 'app-client-form',
@@ -25,19 +25,17 @@ export class ClientFormComponent {
 
   public form = inject(ClientFormService).getForm();
 
-  searchClientByCpf(value: string) {
-    const cpf = value.replaceAll(/[^0-9]/g, '');
-
+  searchClientByCpf(cpf: string) {
     if (cpf.length !== CPF_LENGTH) return;
 
     this.form.disable();
-    this.parkVehicleFormService.getByCpf(cpf).subscribe({
+    this.parkVehicleFormService.getClientByCpf(cpf).subscribe({
       next: (client) => {
         this.form.patchValue(client);
         this.form.enable();
       },
       error: () => {
-        this.toastr.info('Cliente não cadastrado. Cadastre o cliente para continuar.');
+        this.toastr.info('Cliente não encontrado. Cadastre o cliente para continuar.');
         this.form.enable();
       },
     });

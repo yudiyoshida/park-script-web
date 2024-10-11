@@ -10,7 +10,11 @@ import { Client } from '../../shared/models/client/client.model';
 export class ParkVehicleFormService {
   private http = inject(HttpClient);
 
-  getByCpf(cpf: string): Observable<Client> {
-    return this.http.post<Client>(`${environment.api}/clients`, { cpf });
+  getClientByCpf(cpf: string): Observable<Client> {
+    return this.http.post<Client>(`${environment.api}/clients/find-by-cpf`, { cpf });
+  }
+
+  getVehicleByPlate(plate: string): Observable<any> {
+    return this.http.post(`${environment.api}/vehicles/find-by-plate`, { plate });
   }
 }

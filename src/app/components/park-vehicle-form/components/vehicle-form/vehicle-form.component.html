@@ -1,7 +1,14 @@
 <form class="py-4 space-y-1">
   <mat-form-field appearance="outline" class="  w-full">
     <mat-label>Placa</mat-label>
-    <input matInput type="text" mask="AAA-AAAA" [formControl]="form.controls.plate" />
+    <input
+      #plate
+      matInput
+      type="text"
+      mask="AAA-AAAA"
+      [formControl]="form.controls.plate"
+      (blur)="searchVehicleByPlate(plate.value)"
+    />
     <mat-error>Campo obrigatório</mat-error>
   </mat-form-field>
 

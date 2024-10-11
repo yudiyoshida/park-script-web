@@ -1,4 +1,5 @@
 <mat-stepper
+  #stepper
   [linear]="true"
   [orientation]="(isHandset$ | async) ? 'vertical' : 'horizontal'"
 >
@@ -13,7 +14,7 @@
     <app-vehicle-form />
     <div class="text-right space-x-3">
       <button type="button" mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
-      <button type="button" mat-flat-button color="primary" matStepperNext>Salvar</button>
+      <button type="button" mat-flat-button color="primary" (click)="parkVehicle()">Salvar</button>
     </div>
   </mat-step>
 

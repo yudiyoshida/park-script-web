@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnDestroy, output } from '@angular/core';
+import { Component, inject, OnDestroy, output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { map, shareReplay } from 'rxjs';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { ClientFormService } from './components/client-form/client-form.service';
@@ -26,6 +26,8 @@ export class ParkVehicleFormComponent implements OnDestroy {
   private clientFormService = inject(ClientFormService);
   private vehicleFormService = inject(VehicleFormService);
 
+  @ViewChild('stepper') stepper!: MatStepper;
+
   public isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
     shareReplay(),
@@ -35,8 +37,10 @@ export class ParkVehicleFormComponent implements OnDestroy {
   public clientForm = this.clientFormService.getForm();
   public vehicleForm = this.vehicleFormService.getForm();
 
-  save() {
-    console.log('Vehicle parked!');
+  parkVehicle() {
+    this.stepper.next();
+    console.log('client', this.clientForm.value);
+    console.log('vehicle', this.vehicleForm.value);
   }
 
   close() {
