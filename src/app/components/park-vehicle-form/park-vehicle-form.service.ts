@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { Client } from '../../shared/models/client/client.model';
 
-export interface CreateClientResponse {
+export interface CreateResponse {
   id: string;
 }
 
@@ -22,7 +22,11 @@ export class ParkVehicleFormService {
     return this.http.post(`${environment.api}/vehicles/find-by-plate`, { plate });
   }
 
-  createClient(client: any): Observable<CreateClientResponse> {
-    return this.http.post<CreateClientResponse>(`${environment.api}/clients`, client);
+  createClient(client: any): Observable<CreateResponse> {
+    return this.http.post<CreateResponse>(`${environment.api}/clients`, client);
+  }
+
+  createVehicle(vehicle: any): Observable<CreateResponse> {
+    return this.http.post<CreateResponse>(`${environment.api}/vehicles`, vehicle);
   }
 }

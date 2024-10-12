@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VehicleFormService {
-  private fb = inject(FormBuilder);
+  private fb = inject(NonNullableFormBuilder);
 
   protected vehicleForm = this.fb.group({
     plate: ['', [Validators.required]],

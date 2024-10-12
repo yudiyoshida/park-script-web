@@ -2,12 +2,11 @@
   <mat-form-field appearance="outline" class="  w-full">
     <mat-label>Placa</mat-label>
     <input
-      #plate
       matInput
       type="text"
       mask="AAA-AAAA"
       [formControl]="form.controls.plate"
-      (blur)="searchVehicleByPlate(plate.value)"
+      (blur)="searchVehicleByPlate()"
     />
     <mat-error>Campo obrigatório</mat-error>
   </mat-form-field>
@@ -23,4 +22,20 @@
     <input matInput type="text" [formControl]="form.controls.color" />
     <mat-error>Campo obrigatório</mat-error>
   </mat-form-field>
+
+  <div class="text-right">
+    <button
+      mat-stroked-button
+      type="button"
+      color="primary"
+      (click)="goBack()"
+    >Voltar</button>
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      (click)="createVehicle()"
+      [disabled]="form.invalid"
+    >Próximo</button>
+  </div>
 </form>

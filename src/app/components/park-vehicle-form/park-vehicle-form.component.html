@@ -4,15 +4,16 @@
   [orientation]="(isHandset$ | async) ? 'vertical' : 'horizontal'"
 >
   <mat-step label="Informações do motorista" [stepControl]="clientForm">
-    <app-client-form (nextClick)="nextStep()" />
+    <app-client-form
+      (saveClient)="onSaveClient($event)"
+    />
   </mat-step>
 
   <mat-step label="Informações do veículo" [stepControl]="vehicleForm">
-    <app-vehicle-form />
-    <div class="text-right space-x-3">
-      <button type="button" mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
-      <button type="button" mat-flat-button color="primary" (click)="parkVehicle()">Salvar</button>
-    </div>
+    <app-vehicle-form
+      (returnToClient)="previousStep()"
+      (saveVehicle)="onSaveVehicle($event)"
+    />  
   </mat-step>
 
   <mat-step label="Conclusão">

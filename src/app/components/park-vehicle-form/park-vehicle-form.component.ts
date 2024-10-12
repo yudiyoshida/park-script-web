@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy, output, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { map, shareReplay } from 'rxjs';
@@ -25,6 +26,7 @@ export class ParkVehicleFormComponent implements OnDestroy {
   private breakpointObserver = inject(BreakpointObserver);
   private clientFormService = inject(ClientFormService);
   private vehicleFormService = inject(VehicleFormService);
+  private fb = inject(FormBuilder);
 
   @ViewChild('stepper') stepper!: MatStepper;
 
@@ -33,9 +35,18 @@ export class ParkVehicleFormComponent implements OnDestroy {
     shareReplay(),
   );
 
+  public form = this.fb.group({
+    clientId: ['', [Validators.required]],
+    vehicleId: ['', [Validators.required]],
+  });
+
   public closeClick = output<void>();
   public clientForm = this.clientFormService.getForm();
   public vehicleForm = this.vehicleFormService.getForm();
+
+  previousStep() {
+    this.stepper.previous();
+  }
 
   nextStep() {
     this.stepper.next();
@@ -45,6 +56,16 @@ export class ParkVehicleFormComponent implements OnDestroy {
     this.stepper.next();
     console.log('client', this.clientForm.value);
     console.log('vehicle', this.vehicleForm.value);
+  }
+
+  onSaveClient(id: string) {
+    this.form.controls.clientId.setValue(id);
+    this.nextStep();
+  }
+
+  onSaveVehicle(id: string) {
+    this.form.controls.vehicleId.setValue(id);
+    this.parkVehicle();
   }
 
   close() {

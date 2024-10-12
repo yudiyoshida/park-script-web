@@ -26,7 +26,7 @@ export class ClientFormComponent {
   private toastr = inject(ToastrService);
 
   public form = inject(ClientFormService).getForm();
-  public nextClick = output<void>();
+  public saveClient = output<string>();
 
   searchClientByCpf() {
     const cpf = this.form.controls.cpf.value;
@@ -34,6 +34,8 @@ export class ClientFormComponent {
     if (cpf.length !== CPF_LENGTH) return;
 
     this.form.disable();
+    this.form.controls.name.reset();
+    this.form.controls.phone.reset();
     this.parkVehicleFormService.getClientByCpf(cpf).subscribe({
       next: (client) => {
         this.form.enable();
@@ -49,9 +51,9 @@ export class ClientFormComponent {
   createClient() {
     this.form.disable();
     this.parkVehicleFormService.createClient(this.form.value).subscribe({
-      next: () => {
+      next: (res) => {
         this.form.enable();
-        this.nextClick.emit();
+        this.saveClient.emit(res.id);
       },
       error: () => {
         this.form.enable();
