@@ -4,5 +4,5 @@ export interface ParkingSpot {
   id: string;
   name: string;
   type: ParkingSpotType;
-  occupied: boolean;
+  vehicleId: string | null;
 }
