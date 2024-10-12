@@ -37,6 +37,10 @@ export class ParkVehicleFormComponent implements OnDestroy {
   public clientForm = this.clientFormService.getForm();
   public vehicleForm = this.vehicleFormService.getForm();
 
+  nextStep() {
+    this.stepper.next();
+  }
+
   parkVehicle() {
     this.stepper.next();
     console.log('client', this.clientForm.value);

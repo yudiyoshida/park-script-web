@@ -2,12 +2,11 @@
   <mat-form-field appearance="outline" class="w-full">
     <mat-label>CPF</mat-label>
     <input
-      #cpf
       matInput
       type="text"
       mask="000.000.000-00"
       [formControl]="form.controls.cpf"
-      (blur)="searchClientByCpf(cpf.value)"
+      (blur)="searchClientByCpf()"
     />
     <mat-error>Campo obrigatório</mat-error>
   </mat-form-field>
@@ -23,4 +22,14 @@
     <input matInput type="text" mask="(00) 00000-0000" [formControl]="form.controls.phone" />
     <mat-error>Campo obrigatório</mat-error>
   </mat-form-field>
+
+  <div class="text-right">
+    <button
+      mat-flat-button
+      type="button"
+      color="primary"
+      (click)="createClient()"
+      [disabled]="form.invalid"
+    >Próximo</button>
+  </div>
 </form>

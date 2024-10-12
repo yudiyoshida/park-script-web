@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientFormService {
-  private fb = inject(FormBuilder);
+  private fb = inject(NonNullableFormBuilder);
 
   protected clientForm = this.fb.group({
     cpf: ['', [Validators.required]],

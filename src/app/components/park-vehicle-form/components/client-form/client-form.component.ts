@@ -1,18 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
 import { ParkVehicleFormService } from '../../park-vehicle-form.service';
 import { ClientFormService } from './client-form.service';
 
-const CPF_LENGTH = 14;
+const CPF_LENGTH = 11;
 
 @Component({
   selector: 'app-client-form',
   standalone: true,
   templateUrl: './client-form.component.html',
   imports: [
+    MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
     NgxMaskDirective,
@@ -24,19 +26,36 @@ export class ClientFormComponent {
   private toastr = inject(ToastrService);
 
   public form = inject(ClientFormService).getForm();
+  public nextClick = output<void>();
 
-  searchClientByCpf(cpf: string) {
+  searchClientByCpf() {
+    const cpf = this.form.controls.cpf.value;
+
     if (cpf.length !== CPF_LENGTH) return;
 
     this.form.disable();
     this.parkVehicleFormService.getClientByCpf(cpf).subscribe({
       next: (client) => {
-        this.form.patchValue(client);
         this.form.enable();
+        this.form.patchValue(client);
       },
       error: () => {
-        this.toastr.info('Cliente não encontrado. Cadastre o cliente para continuar.');
         this.form.enable();
+        this.toastr.info('Cliente não encontrado. Cadastre o cliente para continuar.');
+      },
+    });
+  }
+
+  createClient() {
+    this.form.disable();
+    this.parkVehicleFormService.createClient(this.form.value).subscribe({
+      next: () => {
+        this.form.enable();
+        this.nextClick.emit();
+      },
+      error: () => {
+        this.form.enable();
+        this.toastr.error('Erro ao cadastrar cliente.');
       },
     });
   }
