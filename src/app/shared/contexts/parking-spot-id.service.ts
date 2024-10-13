@@ -12,7 +12,5 @@ export class ParkingSpotIdService {
 
   setId(value: string|null): void {
     this._id.set(value);
-
-    console.log('ParkingSpotIdService: ', this._id());
   }
 }
