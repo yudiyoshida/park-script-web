@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { ParkingLot } from '../../shared/models/parking-lot/parking-lot.model';
 import { ResumeInformationComponent } from './components/resume-information/resume-information.component';
 
 @Component({
@@ -13,4 +14,6 @@ import { ResumeInformationComponent } from './components/resume-information/resu
     ResumeInformationComponent,
   ],
 })
-export class ResumeCardComponent { }
+export class ResumeCardComponent {
+  @Input({ required: true }) public parkingLot!: ParkingLot | null;
+}

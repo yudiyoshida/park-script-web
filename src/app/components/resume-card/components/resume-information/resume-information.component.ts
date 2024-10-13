@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ResumeInformationComponent {
   @Input({ required: true }) information!: string;
-  @Input({ required: true }) value!: string;
+  @Input({ required: true }) value?: string | number;
 }

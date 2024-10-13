@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ParkingSpot } from '../../shared/models/parking-spot/parking-spot.model';
+import { ParkingLot } from '../../shared/models/parking-lot/parking-lot.model';
 import { ParkingSpotComponent } from './components/parking-spot/parking-spot.component';
 
 @Component({
@@ -11,5 +11,5 @@ import { ParkingSpotComponent } from './components/parking-spot/parking-spot.com
   ],
 })
 export class ParkingLotComponent {
-  @Input({ required: true }) spots!: ParkingSpot[] | null;
+  @Input({ required: true }) parkingLot!: ParkingLot | null;
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ParkingLotComponent } from '../../components/parking-lot/parking-lot.component';
 import { ResumeCardComponent } from '../../components/resume-card/resume-card.component';
 import { ParkingSpotIdService } from '../../shared/contexts/parking-spot-id.service';
-import { ParkingSpot } from '../../shared/models/parking-spot/parking-spot.model';
+import { ParkingLot } from '../../shared/models/parking-lot/parking-lot.model';
 import { ParkingSpotService } from '../../shared/services/parking-spot/parking-spot.service';
 
 @Component({
@@ -21,18 +21,18 @@ export class HomeComponent {
   private parkingSpotService = inject(ParkingSpotService);
   private parkingSpotIdService = inject(ParkingSpotIdService);
 
-  public spots$!: Observable<ParkingSpot[]>;
+  public parkingLot$!: Observable<ParkingLot>;
 
   constructor() {
-    // update parking spot list every time the user closes a modal
+    // update parking spot list every time the user closes a
     effect(() => {
       if (!this.parkingSpotIdService.getId()) {
-        this.getSpots();
+        this.getParkingLot();
       }
     });
   }
 
-  private getSpots(): void {
-    this.spots$ = this.parkingSpotService.getSpots();
+  private getParkingLot(): void {
+    this.parkingLot$ = this.parkingSpotService.getSpots();
   }
 }

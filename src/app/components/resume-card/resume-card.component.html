@@ -4,9 +4,9 @@
     <mat-card-subtitle>Valor por hora hoje: R$5,00</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="mt-3">
-    <app-resume-information information="Vagas ocupadas:" value="9" />
-    <app-resume-information information="Vagas livres:" value="3" />
-    <app-resume-information information="Total de vagas:" value="12" />
-    <app-resume-information information="Valor total:" value="R$ 36,00" />
+    <app-resume-information information="Vagas ocupadas:" [value]="parkingLot?.occupiedSpots" />
+    <app-resume-information information="Vagas livres:" [value]="parkingLot?.freeSpots" />
+    <app-resume-information information="Total de vagas:" [value]="parkingLot?.totalSpots" />
+    <!-- <app-resume-information information="Valor total:" [value]="R$ 36,00" /> -->
   </mat-card-content>
 </mat-card>
