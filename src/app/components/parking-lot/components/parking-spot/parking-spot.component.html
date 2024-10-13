@@ -10,21 +10,21 @@
     focus:border-primary focus:text-primary
   "
   >
-  @if (type === 'HANDICAPPED') {
+  @if (spot.type === 'HANDICAPPED') {
     <mat-icon class="absolute left-2 top-2">accessible</mat-icon>
   }
-  @else if (type === 'ELDERLY') {
+  @else if (spot.type === 'ELDERLY') {
     <mat-icon class="absolute left-2 top-2">elderly</mat-icon>
   }
 
-  @if (vehicle) {
+  @if (spot.vehicle) {
     <div class="flex flex-col justify-center items-center gap-4">
       <mat-icon class="scale-150">no_crash</mat-icon>
-      <p class="font-medium">{{ vehicle.plate | uppercase }}</p>
-      <p>{{ name }}</p>
+      <p class="font-medium">{{ spot.vehicle.plate | uppercase }}</p>
+      <p>{{ spot.name }}</p>
     </div>
   }
   @else {
-    <p class="text-4xl">{{ name }}</p>
+    <p class="text-4xl">{{ spot.name }}</p>
   }
 </section>
