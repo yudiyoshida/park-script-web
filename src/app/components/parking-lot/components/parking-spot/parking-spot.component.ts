@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ParkingSpotType } from '../../../../shared/models/parking-spot/parking-spot.enum';
+import { Vehicle } from '../../../../shared/models/vehicle/vehicle.model';
 import { ParkVehicleDialogComponent } from '../park-vehicle-dialog/park-vehicle-dialog.component';
 import { RemoveVehicleDialogComponent } from '../remove-vehicle-dialog/remove-vehicle-dialog.component';
 
@@ -20,11 +21,10 @@ export class ParkingSpotComponent {
 
   @Input({ required: true }) name!: string;
   @Input({ required: true }) type!: ParkingSpotType;
-  @Input({ required: true }) isOccupied!: boolean;
-  @Input() plate!: string;
+  @Input({ required: true }) vehicle!: Vehicle | null;
 
   openDialog() {
-    if (this.isOccupied) {
+    if (this.vehicle) {
       this.dialog.open(RemoveVehicleDialogComponent);
     } else {
       this.dialog.open(ParkVehicleDialogComponent);
