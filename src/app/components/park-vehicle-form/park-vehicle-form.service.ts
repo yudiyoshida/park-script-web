@@ -29,4 +29,8 @@ export class ParkVehicleFormService {
   createVehicle(vehicle: any): Observable<CreateResponse> {
     return this.http.post<CreateResponse>(`${environment.api}/vehicles`, vehicle);
   }
+
+  parkVehicle(parkingSpotId: string, vehicleId: string) {
+    return this.http.post(`${environment.api}/parking-spots/park`, { parkingSpotId, vehicleId });
+  }
 }
