@@ -1,12 +1,33 @@
-<mat-card>
-  <mat-card-header class="flex justify-between items-center ">
-    <mat-card-title>Retirar o veículo</mat-card-title>
-    <button mat-icon-button (click)="closeDialog()">
+<mat-card class="max-w-md mx-auto shadow-lg rounded-lg">
+  <mat-card-header class="flex justify-between items-center">
+    <mat-card-title>Resumo do Estacionamento</mat-card-title>
+    <button mat-icon-button aria-label="Fechar" (click)="closeDialog()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>
-  <mat-card-content>
-    <!-- <app-park-vehicle-form (closeClick)="closeDialog()" />/ -->
-     <p>Remover</p>
+  <mat-card-content class="space-y-4 mt-5">
+    <div class="flex justify-between items-center">
+      <p class="font-medium">Placa:</p>
+      <p>{{ data?.vehicle.plate }}</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <p class="font-medium">Modelo:</p>
+      <p>{{ data?.vehicle.model }}</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <p class="font-medium">Cor:</p>
+      <p>{{ data?.vehicle.color }}</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <p class="font-medium">Entrada:</p>
+      <p>{{ data?.occupiedAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <p class="font-medium">Valor a pagar:</p>
+      <p class="text-primary font-bold">R$ {{ 12.00 }}</p>
+    </div>
+    <div class="pt-4">
+      <button mat-raised-button color="primary" class="w-full" (click)="releaseVehicle()">Finalizar</button>
+    </div>
   </mat-card-content>
 </mat-card>

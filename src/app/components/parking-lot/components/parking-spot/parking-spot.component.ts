@@ -26,9 +26,16 @@ export class ParkingSpotComponent {
     this.parkingSpotIdService.setId(this.spot.id);
 
     if (this.spot.vehicle) {
-      this.dialog.open(RemoveVehicleDialogComponent).afterClosed().subscribe(() => this.parkingSpotIdService.setId(null));
+      this.dialog.open(RemoveVehicleDialogComponent, {
+        data: this.spot,
+      })
+      .afterClosed()
+      .subscribe(() => this.parkingSpotIdService.setId(null));
+
     } else {
-      this.dialog.open(ParkVehicleDialogComponent).afterClosed().subscribe(() => this.parkingSpotIdService.setId(null));
+      this.dialog.open(ParkVehicleDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.parkingSpotIdService.setId(null));
     }
   }
 }

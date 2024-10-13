@@ -13,4 +13,8 @@ export class ParkingSpotService {
   public getSpots(): Observable<ParkingLot> {
     return this.http.get<ParkingLot>(`${environment.api}/parking-spots`);
   }
+
+  public releaseVehicle(parkingSpotId: string) {
+    return this.http.post(`${environment.api}/parking-spots/release`, { parkingSpotId });
+  }
 }
