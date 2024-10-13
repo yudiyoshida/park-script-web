@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
 import { ParkVehicleFormService } from '../../park-vehicle-form.service';
+import { VehicleFormService } from '../vehicle-form/vehicle-form.service';
 import { ClientFormService } from './client-form.service';
 
 const CPF_LENGTH = 11;
@@ -23,10 +24,11 @@ const CPF_LENGTH = 11;
 })
 export class ClientFormComponent {
   private parkVehicleFormService = inject(ParkVehicleFormService);
+  private vehicleFormService = inject(VehicleFormService);
   private toastr = inject(ToastrService);
 
   public form = inject(ClientFormService).getForm();
-  public saveClient = output<string>();
+  public saveClient = output<void>();
 
   searchClientByCpf() {
     const cpf = this.form.controls.cpf.value;
@@ -53,7 +55,8 @@ export class ClientFormComponent {
     this.parkVehicleFormService.createClient(this.form.value).subscribe({
       next: (res) => {
         this.form.enable();
-        this.saveClient.emit(res.id);
+        this.vehicleFormService.getForm().controls.clientId.setValue(res.id);
+        this.saveClient.emit();
       },
       error: () => {
         this.form.enable();

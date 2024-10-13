@@ -11,6 +11,7 @@ export class VehicleFormService {
     plate: ['', [Validators.required]],
     model: ['', [Validators.required]],
     color: ['', [Validators.required]],
+    clientId: ['', [Validators.required]],
   });
 
   getForm() {

@@ -5,14 +5,14 @@
 >
   <mat-step label="Informações do motorista" [stepControl]="clientForm">
     <app-client-form
-      (saveClient)="onSaveClient($event)"
+      (saveClient)="nextStep()"
     />
   </mat-step>
 
   <mat-step label="Informações do veículo" [stepControl]="vehicleForm">
     <app-vehicle-form
       (returnToClient)="previousStep()"
-      (saveVehicle)="onSaveVehicle($event)"
+      (saveVehicle)="parkVehicle($event)"
     />  
   </mat-step>
 

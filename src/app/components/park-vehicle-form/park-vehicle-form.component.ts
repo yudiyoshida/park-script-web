@@ -39,10 +39,7 @@ export class ParkVehicleFormComponent implements OnDestroy {
     shareReplay(),
   );
 
-  public clientId!: string;
-  public vehicleId!: string;
   public closeClick = output<void>();
-
   public clientForm = this.clientFormService.getForm();
   public vehicleForm = this.vehicleFormService.getForm();
 
@@ -54,24 +51,14 @@ export class ParkVehicleFormComponent implements OnDestroy {
     this.stepper.next();
   }
 
-  onSaveClient(id: string) {
-    this.clientId = id;
-    this.nextStep();
-  }
-
-  onSaveVehicle(id: string) {
-    this.vehicleId = id;
-    this.parkVehicle();
-  }
-
-  parkVehicle() {
+  parkVehicle(vehicleId: string) {
     const parkingSpotId = this.parkingSpotIdService.getId();
     if (!parkingSpotId) {
       this.toastr.error('Ocorreu um erro. Feche o formulário e tente novamente.');
       return;
     }
 
-    this.parkVehicleFormService.parkVehicle(parkingSpotId, this.vehicleId).subscribe({
+    this.parkVehicleFormService.parkVehicle(parkingSpotId, vehicleId).subscribe({
       next: () => this.stepper.next(),
       error: (err) => this.toastr.error(err.error.message),
     });
