@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -18,12 +18,20 @@ import { ParkingSpotService } from '../../../../shared/services/parking-spot/par
     DatePipe,
   ],
 })
-export class RemoveVehicleDialogComponent {
+export class RemoveVehicleDialogComponent implements OnInit {
   private dialogRef = inject(MatDialogRef);
   private parkingSpotService = inject(ParkingSpotService);
   private toastr = inject(ToastrService);
 
+  public amount!: number;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  ngOnInit(): void {
+    this.parkingSpotService.getAmount(this.data.id).subscribe((response) => {
+      this.amount = response.amount;
+    });
+  }
 
   releaseVehicle() {
     this.parkingSpotService.releaseVehicle(this.data.id).subscribe(() => {

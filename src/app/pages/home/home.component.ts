@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ParkingLotComponent } from '../../components/parking-lot/parking-lot.component';
 import { ResumeCardComponent } from '../../components/resume-card/resume-card.component';
 import { ParkingSpotIdService } from '../../shared/contexts/parking-spot-id.service';
@@ -22,17 +22,25 @@ export class HomeComponent {
   private parkingSpotIdService = inject(ParkingSpotIdService);
 
   public parkingLot$!: Observable<ParkingLot>;
+  public totalAmount$!: Observable<number>;
 
   constructor() {
-    // update parking spot list every time the user closes a
+    // update parking spot list every time the user closes a modal
     effect(() => {
       if (!this.parkingSpotIdService.getId()) {
         this.getParkingLot();
+        this.getTotalAmount();
       }
     });
   }
 
   private getParkingLot(): void {
     this.parkingLot$ = this.parkingSpotService.getSpots();
+  }
+
+  private getTotalAmount(): void {
+    this.totalAmount$ = this.parkingSpotService.getTotalAmount().pipe(
+      map(res => res.totalAmount ?? 0),
+    );
   }
 }

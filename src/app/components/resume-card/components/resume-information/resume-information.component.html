@@ -1,4 +1,8 @@
 <div class="flex justify-between items-center border-b py-2">
   <p class="flex-1">{{ information }}</p>
-  <p>{{ value }}</p>
+  @if (isCurrency) {
+    <p>{{ value | currency: 'BRL' }}</p>
+  } @else {
+    <p>{{ value }}</p>
+  }
 </div>

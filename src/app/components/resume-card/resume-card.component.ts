@@ -16,4 +16,5 @@ import { ResumeInformationComponent } from './components/resume-information/resu
 })
 export class ResumeCardComponent {
   @Input({ required: true }) public parkingLot!: ParkingLot | null;
+  @Input({ required: true }) public totalAmount: number | null = 0;
 }

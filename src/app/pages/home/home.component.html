@@ -1,8 +1,14 @@
-<section class="flex flex-col-reverse lg:flex-row justify-between items-start gap-9 p-4 relative">
-  <div class="w-full lg:basis-2/3">
-    <app-parking-lot [parkingLot]="parkingLot$ | async" />
-  </div>
-  <div class="w-full lg:basis-1/3 lg:sticky top-4">
-    <app-resume-card [parkingLot]="parkingLot$ | async" />
-  </div>
-</section>
+@if(parkingLot$ | async; as parkingLot) {
+  <section class="flex flex-col-reverse lg:flex-row justify-between items-start gap-9 p-4 relative">
+    <div class="w-full lg:basis-2/3">
+      <app-parking-lot [parkingLot]="parkingLot" />
+    </div>
+    <div class="w-full lg:basis-1/3 lg:sticky top-4">
+      <app-resume-card [parkingLot]="parkingLot" [totalAmount]="totalAmount$ | async" />
+    </div>
+  </section>
+} @else {
+  <section class="flex justify-center items-center h-screen">
+    <p>Carregando...</p>
+  </section>
+}
